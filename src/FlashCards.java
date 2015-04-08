@@ -7,11 +7,11 @@ import javax.swing.*;
 public class FlashCards extends JFrame {
 	
 	public FlashCards(String[] words, String[] definitions, int x) {
-		JPanel p1, p2;
 		Font font1;
 		JTextArea text;
 		JButton[] button;
-		Boolean correct;
+		JButton quit;
+		JPanel p1, p2;
 		
 		p1 = new JPanel();
 		p1.setLayout(new GridLayout(0 , 3));
@@ -26,17 +26,18 @@ public class FlashCards extends JFrame {
 			if (n == x) {
 				button[n].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Flash.closeWindow();
 						JOptionPane.showMessageDialog(null, "You are correct!");
-						
+						Flash.createCards();
 					}
 				});
+				
 			}
 			
 			else {
 				button[n].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						JOptionPane.showMessageDialog(null, "Sorry, that's not right.");
-						boolean correct = isWrong();
 					}
 				});
 			}
@@ -46,6 +47,17 @@ public class FlashCards extends JFrame {
 			p1.add(button[i]);
 		}		
 		
+		quit = new JButton("Quit");
+		quit.setFont(font1);
+		
+		quit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Good luck studying!");
+				System.exit(0);
+			}
+		});
+		
+		p1.add(quit);
 		
 		text = new JTextArea();
 		text.setText("Please pick the word for : " + definitions[x]);
@@ -54,24 +66,15 @@ public class FlashCards extends JFrame {
 		text.setSize(10, 200);
 		text.setFont(font1);
 		text.setAlignmentY(CENTER_ALIGNMENT);
+		text.setEditable(false);
 	
 		p2 = new JPanel(new BorderLayout());
 		p2.add(text, BorderLayout.NORTH);
 		p2.add(p1, BorderLayout.CENTER);
 		add(p2,BorderLayout.CENTER);
-		
-		
 	}
 	
-	public static boolean isRight() {
-		boolean correct;
-		correct = true;
-		return correct;
-	}
 	
-	public static boolean isWrong() {
-		boolean correct;
-		correct = false;
-		return correct;
-	}
+	
+		
 }
