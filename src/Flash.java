@@ -1,9 +1,11 @@
 import javax.swing.*;
+
 public class Flash {
 	static FlashCards panel, panel1;
 	static String[] words, definitions;
+	public static int t, n;
 	public static void main(String[] args) {
-		int numDef, n, t;
+		int numDef;
 		String number;
 		final String Sentinel;
 		
@@ -29,31 +31,10 @@ public class Flash {
 			words[n] = JOptionPane.showInputDialog("Please enter word " + t + " or type \"quit\" to finish.");
 		}
 		
-		createCards();
+		FlashCards.createCards(n, words, definitions);
 		
-	}
-
-
-	
-	public static FlashCards createCards() {
-		int x;
-		FlashCards panel;
-		
-		x = (int) (Math.random() * definitions.length);
-		panel = new FlashCards(words, definitions, x);
-		panel.setSize(1000, 1000);
-		panel.setLocationRelativeTo(null);
-		panel.setTitle("Study Cards");
-		panel.setVisible(true);
-		panel1 = panel;
-		return panel;
-	}
-	
-	public static void closeWindow() {
-		panel1.setEnabled(false);
 	}
 }
-
 		
 		
 		
